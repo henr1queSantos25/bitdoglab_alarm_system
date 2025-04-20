@@ -8,6 +8,7 @@
 #include "libs/buttons.h"
 #include "libs/led_5x5.h"
 #include "libs/buzzer.h"
+#include "libs/ledRGB.h"
 
 // Configuraçãp do display
 #define I2C_PORT i2c1
@@ -63,11 +64,11 @@ int main() {
             atualizar_buzzer_alarme(); // Chama a função para tocar o alarme
             animacao_alarme_x(); // Chama a função para piscar o X na matriz de LED
             gpio_put(LED_PIN_GREEN, 0);
-            atualizar_fade_led_red();
+            atualizar_fade_led(LED_PIN_RED); // Atualiza o fade do LED vermelho
         } else if (alarme_ativo) {
             pwm_set_gpio_level(LED_PIN_RED, 0); // Desliga o LED vermelho
             atualizarScannerHorizontal(); // Atualiza o scanner horizontal se o alarme estiver ativo
-            piscar_led_verde(); // Pisca o LED verde se o alarme estiver ativo
+            piscar_led(LED_PIN_GREEN); // Pisca o LED se o alarme estiver ativo
         } else {
             drawMatrix(5); // Desenha a matriz de LED com a cor padrão (desligado)
             gpio_put(LED_PIN_GREEN, 0); // Desliga o LED verde
@@ -91,19 +92,6 @@ void setup() {
     setupLED(LED_PIN_GREEN);                        // Configura o LED verde
     setup_pwm_led(LED_PIN_RED);                     // Configura o LED vermelho
     init_buzzer();                                 // Inicializa o buzzer
-}
-
-void setupLED(uint led) {
-    gpio_init(led);              // Inicializa o pino do LED
-    gpio_set_dir(led, GPIO_OUT); // Define o pino como saída
-    gpio_put(led, 0);            // Desliga o LED inicialmente
-}
-
-void setup_pwm_led(uint led) {
-    gpio_set_function(led, GPIO_FUNC_PWM);
-    uint slice_num = pwm_gpio_to_slice_num(led);
-    pwm_set_wrap(slice_num, 255);
-    pwm_set_enabled(slice_num, true);
 }
 
 void setup_joystick() {
@@ -169,53 +157,4 @@ void gpio_irq_handler(uint gpio, uint32_t events) {
 
         last_time = time; // atualiza o tempo
     }
-}
-
-/* ==========================================================
-   FUNÇÃO PARA PISCAR O LED
-   ========================================================== */
-
-//FUNÇÃO PARA PISCAR O LED VERDE
-absolute_time_t proximo_piscar; // Variável para armazenar o tempo do próximo piscar do LED
-bool led_verde_aceso = false; // Variável para armazenar o estado do LED verde
-
-void piscar_led_verde() {
-    if (!time_reached(proximo_piscar))
-        return;
-
-    // Inverte o estado atual
-    led_verde_aceso = !led_verde_aceso;
-    gpio_put(LED_PIN_GREEN, led_verde_aceso);
-
-    // Define próximo momento de alternância (ex: a cada 500 ms)
-    proximo_piscar = make_timeout_time_ms(500);
-}
-
-// FUNÇÃO PARA FAZER O LED VERMELHO FADE
-int brilho_red = 0; // Brilho do LED vermelho (0-255)
-bool subindo = true; // Variável para controlar a direção do fade
-absolute_time_t proximo_fade; // Variável para armazenar o tempo do próximo fade
-
-void atualizar_fade_led_red() {
-    if (!time_reached(proximo_fade)) return;
-
-    pwm_set_gpio_level(LED_PIN_RED, brilho_red);
-
-    // Atualiza valor do brilho
-    if (subindo) {
-        brilho_red += 5;
-        if (brilho_red >= 255) {
-            brilho_red = 255;
-            subindo = false;
-        }
-    } else {
-        brilho_red -= 5;
-        if (brilho_red <= 0) {
-            brilho_red = 0;
-            subindo = true;
-        }
-    }
-
-    // Define próximo momento do fade
-    proximo_fade = make_timeout_time_ms(15); // controla a suavidade da transição
 }
