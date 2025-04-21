@@ -57,13 +57,13 @@ A transição para o modo de defesa ocorre mediante o acionamento de um botão d
 
 ---
 
-## 🎥 Demonstração
+## Demonstração
 
 📽️ **Vídeo de demonstração:** [Link para o vídeo](https://seu-link-aqui.com)
 
 ---
 
-## 💻 Execução
+## Execução
 
 1. Suba o código na BitDogLab via VS Code com o ambiente do RP2040.
 2. Pressione o botão 1 para ativar o alarme (modo monitoramento).
@@ -71,7 +71,7 @@ A transição para o modo de defesa ocorre mediante o acionamento de um botão d
 
 ---
 
-## 🧠 Conceitos Aplicados
+## Conceitos Aplicados
 
 - Controle de periféricos embarcados (ADC, I2C, GPIO, PIO, PWM)
 - Interrupções com debounce por software
@@ -81,7 +81,7 @@ A transição para o modo de defesa ocorre mediante o acionamento de um botão d
 
 ---
 
-## 👨‍💻 Desenvolvido por
+## Desenvolvido por
 
 - **Henrique Oliveira dos Santos**  
 - [LinkedIn](https://www.linkedin.com/in/dev-henriqueo-santos/)
