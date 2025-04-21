@@ -19,7 +19,7 @@ pico_sdk_init()
 
 add_executable(bitdoglab_alarm_system bitdoglab_alarm_system.c libs/ssd1306.c libs/buttons.c libs/led_5x5.c libs/buzzer.c libs/ledRGB.c)
 
-pico_generate_pio_header(bitdoglab_alarm_system ${CMAKE_CURRENT_LIST_DIR}/bitdoglab_alarm_system.pio)
+pico_generate_pio_header(bitdoglab_alarm_system ${CMAKE_CURRENT_LIST_DIR}/libs/bitdoglab_alarm_system.pio)
 
 pico_set_program_name(bitdoglab_alarm_system "bitdoglab_alarm_system")
 pico_set_program_version(bitdoglab_alarm_system "0.1")
