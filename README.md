@@ -49,7 +49,7 @@ A transição para o modo de defesa ocorre mediante o acionamento de um botão d
 ## 📁 Estrutura do Projeto
 
 - `bitdoglab_alarm_system.c` — Lógica principal do sistema (modos, entradas, animações)
-- `bitdoglab_alarm_system.pio` — Código PIO para controle eficiente da matriz de LEDs 5x5. 
+- `libs/bitdoglab_alarm_system.pio` — Código PIO para controle eficiente da matriz de LEDs 5x5. 
 - `libs/led_5x5.c/.h` — Controle da matriz de LEDs 5x5 via PIO
 - `libs/buzzer.c/.h` — Geração de sons com buzzer
 - `libs/ssd1306.c/.h` — Controle do display OLED via I2C
@@ -60,7 +60,7 @@ A transição para o modo de defesa ocorre mediante o acionamento de um botão d
 
 ## Demonstração
 
-📽️ **Vídeo de demonstração:** [Link para o vídeo](https://seu-link-aqui.com)
+📽️ **Vídeo de demonstração:** [Link para o vídeo](https://drive.google.com/file/d/1M_Lhx5XzcIsgyD-bQIyQqbxiw13CxtsP/view)
 
 ---
 
